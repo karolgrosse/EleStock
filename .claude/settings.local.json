@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(flutter --version)",
-      "Read(//opt/homebrew/Caskroom/**)",
-      "Bash(zsh -lic 'which flutter')"
-    ]
-  }
-}

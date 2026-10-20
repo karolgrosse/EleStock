@@ -1,6 +1,6 @@
 # Project card: EleStock
 
-**Section:** 3 people · **Approved:** _<date>_ (by _<lecturer>_) · **Status:** _approved / approved with changes_
+**Section:** 4 people 
 
 ## Problem
 
@@ -22,13 +22,13 @@ Members of one university racing team who share a single inventory. Some of them
 | # | Screen | Route | Owner |
 |---|--------|-------|-------|
 | 1 | Login | `/login` | A |
-| 2 | Inventory: search, filter by category and shelf | `/items` | B |
-| 3 | Item details | `/items/:id` | B |
+| 2 | Profile and settings: language, theme, sync status | `/profile` | A |
+| 3 | Inventory: search, filter by category and shelf (main page) | `/items` | B |
 | 4 | Item form (create and edit) | `/items/new`, `/items/:id/edit` | B |
-| 5 | Scanner | `/scan` | C |
-| 6 | History: every stock movement (take, put back, restock, stock count), newest first | `/history` | C |
-| 7 | Shopping list: low stock, mark as ordered | `/shopping` | C |
-| 8 | Profile and settings: language, theme, sync status | `/profile` | A |
+| 5 | Item details | `/items/:id` | C |
+| 6 | Scanner | `/scan` | C |
+| 7 | History: every stock movement (take, put back, restock, stock count), newest first | `/history` | D |
+| 8 | Shopping list: low stock, mark as ordered | `/shopping` | D |
 
 ## Data
 
@@ -63,9 +63,12 @@ Members of one university racing team who share a single inventory. Some of them
 
 | Person | Screens | Hard technical part |
 |--------|---------|---------------------|
-| **A** _<name>_ | Login, Profile and settings | Auth, localization (EN and PL), CI and release build |
-| **B** _<name>_ | Inventory, Item details, Item form | Adaptive master–detail layout, drift schema |
-| **C** _<name>_ | Scanner, History, Shopping list | Notifications, sync queue to Supabase |
+| **A** _<name>_ | Login, Profile and settings | Supabase Auth, go_router (with the login redirect), localization (EN and PL), CI and release build |
+| **B** _<name>_ | Inventory, Item form | Adaptive master–detail layout, drift schema and repositories, form validation |
+| **C** _<name>_ | Item details, Scanner | QR scanning (device feature 1), take / put back stock logic, item photos (bonus) |
+| **D** _<name>_ | History, Shopping list | Local notifications (device feature 2), sync queue to Supabase |
+
+Each person owns two screens, one hard technical part and the tests for their own code.
 
 ## Changes agreed at the pitch
 

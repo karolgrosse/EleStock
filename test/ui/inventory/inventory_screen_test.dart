@@ -1,5 +1,4 @@
 import 'package:elestock/main.dart';
-import 'package:elestock/ui/core/widgets/transaction_tile.dart';
 import 'package:elestock/ui/inventory/item_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -38,16 +37,13 @@ void main() {
     expect(find.byType(ItemDetailsView), findsOneWidget);
   });
 
-  testWidgets('item history is listed newest first', (tester) async {
+  testWidgets('search with no match shows the empty state', (tester) async {
     setScreenSize(tester, const Size(390, 844));
     await tester.pumpWidget(const EleStockApp());
 
-    await tester.tap(find.text('Deutsch DT crimp contacts, size 16, nickel'));
-    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(SearchBar), 'flux capacitor');
+    await tester.pump();
 
-    final tiles = tester.widgetList<TransactionTile>(
-      find.byType(TransactionTile),
-    );
-    expect(tiles.map((t) => t.transaction.id), ['t1', 't6']);
+    expect(find.text('No items match your search'), findsOneWidget);
   });
 }
