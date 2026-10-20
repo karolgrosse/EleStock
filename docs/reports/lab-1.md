@@ -1,33 +1,30 @@
 # Lab 1 report: EleStock
 
-Tag: lab-1 · Date: _<date>_
+Tag: lab-1 · Date: 20.10.2026
 
 ## Done
-- #1 Project card, backlog and design notes (PR #_)
-- #2 CI and PR template (PR #_)
-- #3 Models and fake data (PR #_)
-- #4 Theme and reusable widgets (PR #_)
-- #5 Item details screen (PR #_)
-- #6 Inventory screen, the main page (PR #_)
+- #1 Project card, backlog and design notes 
+- #2 Project template, GitHub setup
+- #3 Models and fake data 
+- #4 Theme and reusable widgets 
+- #5 Item details screen 
+- #6 Inventory screen, the main page 
 
 ## Who did what
-| Member | Issues | Pull requests | Reviewed |
-| --- | --- | --- | --- |
-| _A_ | #1, #2 | | #6, #7 |
-| _B_ | #6 | | #1, #5 |
-| _C_ | #3, #5 | | #2, #4 |
-| _D_ | #4, #7 | | #3 |
+| Member | Issues | Pull requests |
+| --- | --- | --- |
+| Grosse | #1, #2 | | 
+| Weindich | #4, #6 | chores/tidy-docs | 
+| Koczorowska | #3, #5 | |
+| Szulik | none (absent) | |
 
 ## Screenshots
-![Inventory](../screenshots/lab-1/inventory.png)
-![Item details](../screenshots/lab-1/details.png)
-![Master–detail](../screenshots/lab-1/inventory-wide.png)
 
 ## Problems and solutions
-_A few sentences._
+None.
 
 ## Changes to the scope
 None.
 
 ## Plan for the next lab
-Choose a state-management approach; add the app shell with history, shopping list and profile; build the inventory view model, the item form and take/put back.
+Add the app shell with history, shopping list and profile; build the inventory view model, the item form and take/put back. Possibly add login/authorisation.
