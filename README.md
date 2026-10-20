@@ -29,9 +29,12 @@ docs/                           project card, design notes, backlog, lab reports
 
 | Member | Area |
 |--------|------|
-| _A_ | Auth, profile and settings, localization, CI and release |
-| _B_ | Inventory, details, form, adaptive layout, drift |
-| _C_ | Scanner, history, shopping list, notifications, sync |
+| Grosse | Login, profile and settings · auth, go_router, localization, CI and release |
+| Weindich | Inventory, item form · master–detail layout, drift database |
+| Koczorowska | Item details, scanner · QR scanning, stock logic |
+| Szulik | History, shopping list · notifications, sync |
+
+How we work (branches, PRs, reviews): [docs/WORKFLOW.md](docs/WORKFLOW.md).
 
 ## Status
 

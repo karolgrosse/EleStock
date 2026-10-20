@@ -7,7 +7,7 @@ void main() => runApp(const EleStockApp());
 class EleStockApp extends StatelessWidget {
   const EleStockApp({super.key});
 
-  static const _seed = Color(0xFFE65100);
+  static const _seed = Color.fromARGB(255, 251, 159, 201);
 
   @override
   Widget build(BuildContext context) {

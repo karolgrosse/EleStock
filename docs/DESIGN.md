@@ -32,7 +32,9 @@ lib/
   ui/inventory/item_details_screen.dart  second page
 test/
   domain/models_test.dart                unit tests for the models
-  widget_test.dart                       widget tests for both pages
+  ui/core/stock_badge_test.dart          the badge text and its screen-reader label
+  ui/inventory/item_details_screen_test.dart
+  ui/inventory/inventory_screen_test.dart
 ```
 
 **The rule behind it** (from part B): *code that changes for different reasons lives in different places.*
@@ -161,11 +163,15 @@ Buttons for later labs (scan, add, edit, take, put back) call `showComingSoon()`
 
 ## 10. Tests
 
-- `test/domain/models_test.dart` (7 unit tests): low-stock threshold (at, above, zero), transaction deltas, and `newestFirst` ordering.
-- `test/widget_test.dart` (3 widget tests):
-  - on a phone-sized screen, tapping an item pushes the details screen
-  - on a 1280px screen, tapping an item shows details in the right pane and pushes no new screen
-  - the details history is listed newest first
+The test folders mirror `lib/`, so each test lands in the same PR as the code it tests.
+
+- `test/domain/models_test.dart` (7 unit tests): low-stock threshold (at, above, zero), transaction deltas, `newestFirst` ordering.
+- `test/ui/core/stock_badge_test.dart` (2): shows "12 pcs"; a screen reader hears "3 pcs, low stock".
+- `test/ui/inventory/item_details_screen_test.dart` (2): the history is newest first; *Take* is disabled at zero stock.
+- `test/ui/inventory/inventory_screen_test.dart` (3):
+  - on a phone, tapping an item pushes the details screen
+  - on a 1280px window, the details appear in the right pane and no screen is pushed
+  - a search with no match shows the empty state
 
 Run with `flutter test`. `dart format .` and `flutter analyze` must report nothing.
 

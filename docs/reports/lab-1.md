@@ -3,20 +3,20 @@
 Tag: lab-1 · Date: _<date>_
 
 ## Done
-- #1 Project card (PR #_)
-- #2 Folder structure, models and fake data (PR #_)
-- #3 Inventory screen, the main page (PR #_)
-- #4 Item details screen (PR #_)
-- #5 Adaptive master–detail inventory (PR #_)
-- #6 Theme and reusable widgets (PR #_)
-- #7 Model and widget tests (PR #_)
+- #1 Project card, backlog and design notes (PR #_)
+- #2 CI and PR template (PR #_)
+- #3 Models and fake data (PR #_)
+- #4 Theme and reusable widgets (PR #_)
+- #5 Item details screen (PR #_)
+- #6 Inventory screen, the main page (PR #_)
 
 ## Who did what
-| Member | Issues | Pull requests |
-| --- | --- | --- |
-| _A_ | #1, #5, #6, #8 | |
-| _B_ | #3, #7 | |
-| _C_ | #2, #4 | |
+| Member | Issues | Pull requests | Reviewed |
+| --- | --- | --- | --- |
+| _A_ | #1, #2 | | #6, #7 |
+| _B_ | #6 | | #1, #5 |
+| _C_ | #3, #5 | | #2, #4 |
+| _D_ | #4, #7 | | #3 |
 
 ## Screenshots
 ![Inventory](../screenshots/lab-1/inventory.png)
