@@ -12,6 +12,9 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          # Pinned so a new Flutter release can't break CI overnight.
+          # Everyone should use the same version locally (flutter --version).
+          flutter-version: 3.47.7
           cache: true
       - run: flutter pub get
       - run: dart format --output=none --set-exit-if-changed .
