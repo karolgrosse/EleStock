@@ -148,7 +148,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
                         } else {
                           Navigator.of(context).push(
                             MaterialPageRoute<void>(
-                              builder: (_) => ItemDetailsScreen(itemId: item.id),
+                              builder: (_) =>
+                                  ItemDetailsScreen(itemId: item.id),
                             ),
                           );
                         }
