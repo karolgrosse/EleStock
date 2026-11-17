@@ -32,19 +32,17 @@ ItemDetailsLoaded _loaded(ItemDetailsViewModel vm) =>
 
 void main() {
   group('load()', () {
-    test(
-      'starts loading, then shows the item with its history newest first',
-      () async {
-        final vm = _vm('dt-crimp-16', instantRepository());
-        expect(vm.state, isA<ItemDetailsLoading>());
+    test('starts loading, then shows the item with its history newest first',
+        () async {
+      final vm = _vm('dt-crimp-16', instantRepository());
+      expect(vm.state, isA<ItemDetailsLoading>());
 
-        await vm.load();
+      await vm.load();
 
-        final state = _loaded(vm);
-        expect(state.item.quantity, 6);
-        expect(state.history.map((t) => t.id), ['t1', 't6']);
-      },
-    );
+      final state = _loaded(vm);
+      expect(state.item.quantity, 6);
+      expect(state.history.map((t) => t.id), ['t1', 't6']);
+    });
 
     test('shows an error when the repository fails', () async {
       final vm = _vm('dt-crimp-16', instantRepository(failureRate: 1));
