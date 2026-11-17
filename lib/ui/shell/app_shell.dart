@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../core/widgets/empty_state.dart';
 import '../history/history_screen.dart';
 import '../inventory/inventory_screen.dart';
 import '../profile/profile_screen.dart';
 import '../scanner/scanner_screen.dart';
+import '../shopping_list/shopping_list_screen.dart';
 
 /// The top-level sections of the app.
 ///
@@ -54,10 +54,7 @@ final _sections = <_Section>[
     'Shopping',
     Icons.shopping_cart_outlined,
     Icons.shopping_cart,
-    (_) => const _ComingSoonSection(
-      title: 'Shopping list',
-      icon: Icons.shopping_cart_outlined,
-    ),
+    (_) => const ShoppingListScreen(),
   ),
   _Section(
     'Profile',
@@ -133,22 +130,6 @@ class _AppShellState extends State<AppShell> {
           ),
         );
       },
-    );
-  }
-}
-
-/// Placeholder for sections whose screens are not merged yet.
-class _ComingSoonSection extends StatelessWidget {
-  const _ComingSoonSection({required this.title, required this.icon});
-
-  final String title;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: EmptyState(icon: icon, message: '$title is coming soon'),
     );
   }
 }
