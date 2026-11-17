@@ -25,6 +25,21 @@ void main() {
     test('is out of stock at zero', () {
       expect(_item(quantity: 0).isOutOfStock, isTrue);
     });
+
+    test('copyWith changes only the given field', () {
+      final item = _item(quantity: 6);
+      final taken = item.copyWith(quantity: 2);
+
+      expect(taken.quantity, 2);
+      expect(taken.name, item.name);
+      expect(item.quantity, 6); // the original is unchanged
+    });
+
+    test('items with the same values are equal', () {
+      expect(_item(quantity: 3), _item(quantity: 3));
+      expect(_item(quantity: 3).hashCode, _item(quantity: 3).hashCode);
+      expect(_item(quantity: 3), isNot(_item(quantity: 4)));
+    });
   });
 
   group('StockTransaction', () {
