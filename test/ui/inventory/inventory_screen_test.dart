@@ -39,6 +39,30 @@ void main() {
     expect(find.byType(ItemDetailsView), findsOneWidget);
   });
 
+  testWidgets('very narrow window still lays out without errors', (
+    tester,
+  ) async {
+    setScreenSize(tester, const Size(390, 600));
+    await tester.pumpWidget(withRepository(const EleStockApp()));
+
+    // Shrink the window step by step, like dragging its edge.
+    for (final width in [150.0, 60.0, 1.0]) {
+      tester.view.physicalSize = Size(width, 600);
+      await tester.pump();
+      expect(tester.takeException(), isNull, reason: 'list at $width px');
+    }
+
+    tester.view.physicalSize = const Size(390, 600);
+    await tester.pump();
+    await tester.tap(find.text('M6×20 bolt, 12.9, black oxide'));
+    await tester.pumpAndSettle();
+
+    tester.view.physicalSize = const Size(60, 600);
+    await tester.pump();
+    expect(tester.takeException(), isNull, reason: 'details at 60 px');
+    expect(find.byType(ItemDetailsScreen), findsOneWidget);
+  });
+
   testWidgets('search with no match shows the empty state', (tester) async {
     setScreenSize(tester, const Size(390, 844));
     await tester.pumpWidget(withRepository(const EleStockApp()));
