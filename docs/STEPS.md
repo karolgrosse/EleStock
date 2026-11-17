@@ -2,14 +2,14 @@
 
 This page is the short version. Follow it top to bottom. The other docs (WORKFLOW, DESIGN, BACKLOG) are reference: open them only when a step points you there.
 
-**Letters:** A = the repo owner (karolgrosse, the only one who can change GitHub settings). B, C and D: pick them and write the names here.
+**Letters:** A = the repo owner (karolgrosse, the only one who can change GitHub settings). The names match the team table in the README.
 
 | Letter | Name | Owns for the whole semester |
 |---|---|---|
-| A | | Login, Profile & settings · auth, go_router, EN/PL, CI, release |
-| B | | Inventory, Item form · tablet layout, drift database |
-| C | | Item details, Scanner · QR scanning, take / put back |
-| D | | History, Shopping list · notifications, sync |
+| A | Grosse | Login, Profile & settings · auth, go_router, EN/PL, CI, release |
+| B | Weindich | Inventory, Item form · tablet layout, drift database |
+| C | Koczorowska | Item details, Scanner · QR scanning, take / put back |
+| D | Szulik | History, Shopping list · notifications, sync |
 
 > The Lab 1 code is already on `main` (the "initial commit"), so **ignore the `reference` branch part of WORKFLOW.md**. This page replaces it.
 
