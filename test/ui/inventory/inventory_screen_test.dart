@@ -43,7 +43,7 @@ void main() {
     tester,
   ) async {
     setScreenSize(tester, const Size(390, 600));
-    await tester.pumpWidget(const EleStockApp());
+    await tester.pumpWidget(withRepository(const EleStockApp()));
 
     // Shrink the window step by step, like dragging its edge.
     for (final width in [150.0, 60.0, 1.0]) {
