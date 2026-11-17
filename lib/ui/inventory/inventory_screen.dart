@@ -6,6 +6,7 @@ import '../core/category_ui.dart';
 import '../core/widgets/coming_soon.dart';
 import '../core/widgets/empty_state.dart';
 import '../core/widgets/stock_badge.dart';
+import '../history/history_screen.dart';
 import '../item_details/item_details_screen.dart';
 import '../scanner/scanner_screen.dart';
 
@@ -47,6 +48,13 @@ class _InventoryScreenState extends State<InventoryScreen> {
             icon: const Icon(Icons.qr_code_scanner),
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(builder: (_) => const ScannerScreen()),
+            ),
+          ),
+          IconButton(
+            tooltip: 'History',
+            icon: const Icon(Icons.history),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const HistoryScreen()),
             ),
           ),
         ],
@@ -148,7 +156,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
                         } else {
                           Navigator.of(context).push(
                             MaterialPageRoute<void>(
-                              builder: (_) => ItemDetailsScreen(itemId: item.id),
+                              builder: (_) =>
+                                  ItemDetailsScreen(itemId: item.id),
                             ),
                           );
                         }
