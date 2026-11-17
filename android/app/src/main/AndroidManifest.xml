@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Release builds need this to reach Supabase. Debug and profile
+         manifests already have it for hot reload. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="elestock"
         android:name="${applicationName}"
