@@ -49,3 +49,9 @@ app.*.map.json
 
 # Claude Code
 .claude/
+
+# Lab instructions from the lecturer (not part of the project)
+docs/MMA Lab *.pdf
+
+# Supabase keys for --dart-define-from-file (copy supabase.example.json)
+supabase.json
