@@ -6,6 +6,7 @@ import '../core/category_ui.dart';
 import '../core/widgets/empty_state.dart';
 import '../core/widgets/error_view.dart';
 import '../core/widgets/stock_badge.dart';
+import '../history/history_screen.dart';
 import '../item_details/item_details_screen.dart';
 import '../item_form/item_form_screen.dart';
 import '../scanner/scanner_screen.dart';
@@ -73,6 +74,13 @@ class _InventoryScaffold extends StatelessWidget {
             icon: const Icon(Icons.qr_code_scanner),
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(builder: (_) => const ScannerScreen()),
+            ),
+          ),
+          IconButton(
+            tooltip: 'History',
+            icon: const Icon(Icons.history),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const HistoryScreen()),
             ),
           ),
         ],
