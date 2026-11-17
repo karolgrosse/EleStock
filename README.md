@@ -11,6 +11,19 @@ flutter pub get
 flutter run
 ```
 
+Without Supabase keys the app uses built-in fake accounts. Log in with **`demo@elestock.dev`** / **`elestock`**.
+
+To log in with your real team account (Supabase Auth):
+
+1. Ask Grosse for `supabase.json` and put it in the project folder. It is gitignored: never commit it. Its shape is in [supabase.example.json](supabase.example.json).
+2. Run with the keys:
+
+   ```bash
+   flutter run --dart-define-from-file=supabase.json
+   ```
+
+Accounts are created by the team lead in the Supabase dashboard. There is no sign-up in the app.
+
 Before every PR, run `dart format .`, `flutter analyze` and `flutter test`. CI runs the same checks.
 
 ## Architecture
@@ -18,12 +31,16 @@ Before every PR, run `dart format .`, `flutter analyze` and `flutter test`. CI r
 ```
 lib/
   main.dart                   composition root: creates the repositories, theme
-  domain/models/              Item, StockTransaction, OrderEntry (immutable, copyWith, ==)
+  domain/models/              Item, StockTransaction, OrderEntry, Member (immutable, copyWith, ==)
   data/
     fake_inventory.dart       fake items, transactions and orders
-    repositories/             interfaces + FakeInventoryRepository (delay, failureRate)
+    repositories/             interfaces + FakeInventoryRepository, FakeAuthRepository,
+                              SupabaseAuthRepository
   ui/
     core/                     shared widgets: ErrorView, EmptyState, StockBadge, TransactionTile
+    auth/                     login form, auth gate, session              (LoginViewModel, SessionViewModel)
+    shell/                    NavigationBar on phones, NavigationRail from 840 px
+    profile/                  member, theme and language, log out     (SettingsViewModel)
     inventory/                list, search, filter, master–detail     (InventoryViewModel)
     item_details/             stock, take / put back, item history    (ItemDetailsViewModel)
     item_form/                create and edit an item, validation     (ItemFormViewModel)
@@ -44,8 +61,11 @@ docs/                         project card, design notes, backlog, lab reports, 
 | `ItemRepository` | all items, one item by id, creating and editing an item, and the `itemUpdates` stream that emits every changed item |
 | `TransactionRepository` | the stock history (all of it or one item's), and recording a take, put back, restock or stock count, which also changes the item's stock |
 | `OrderRepository` | orders of low-stock items: list them, place one, and receive one, which records a restock |
+| `AuthRepository` | the logged-in member, a stream of sign-ins and sign-outs, signing in with email and password, and signing out |
 
-`FakeInventoryRepository` implements all three on one in-memory store, with a `delay` and a `failureRate` (0.0 never fails, 1.0 always fails). The app runs with a 20 % failure rate, so error states show up.
+`FakeInventoryRepository` implements the first three on one in-memory store, with a `delay` and a `failureRate` (0.0 never fails, 1.0 always fails). The app runs with a 20 % failure rate, so error states show up.
+
+`AuthRepository` has two implementations: `SupabaseAuthRepository` (real accounts, used when `main.dart` gets Supabase keys) and `FakeAuthRepository` (demo accounts with the same `delay` and `failureRate`, used without keys and in tests).
 
 The team rules for this structure are in [CLAUDE.md](CLAUDE.md).
 
@@ -64,4 +84,4 @@ How we work (branches, PRs, reviews): [docs/WORKFLOW.md](docs/WORKFLOW.md).
 
 Lab 1: the main page (inventory) and item details run with fake data.
 
-Lab 2: layered architecture with view models and fake repositories. Inventory, item details, item form, scanner, history and shopping list are built, with loading, empty and error states and tests. Login and profile are in progress.
+Lab 2: layered architecture with view models and fake repositories. All 8 screens from the project card are built and reachable from the app shell: login, profile and settings, inventory, item details, item form, scanner, history and shopping list, with loading, empty and error states and tests. Login already uses Supabase Auth.
