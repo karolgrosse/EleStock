@@ -1,7 +1,9 @@
 import 'package:elestock/main.dart';
-import 'package:elestock/ui/inventory/item_details_screen.dart';
+import 'package:elestock/ui/item_details/item_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../helpers/repositories.dart';
 
 void setScreenSize(WidgetTester tester, Size size) {
   tester.view.physicalSize = size;
@@ -14,7 +16,7 @@ void main() {
     tester,
   ) async {
     setScreenSize(tester, const Size(390, 844));
-    await tester.pumpWidget(const EleStockApp());
+    await tester.pumpWidget(withRepository(const EleStockApp()));
 
     await tester.tap(find.text('M6×20 bolt, 12.9, black oxide'));
     await tester.pumpAndSettle();
@@ -25,7 +27,7 @@ void main() {
 
   testWidgets('wide window: details appear next to the list', (tester) async {
     setScreenSize(tester, const Size(1280, 800));
-    await tester.pumpWidget(const EleStockApp());
+    await tester.pumpWidget(withRepository(const EleStockApp()));
 
     expect(find.text('Select an item to see its details'), findsOneWidget);
 
@@ -39,7 +41,7 @@ void main() {
 
   testWidgets('search with no match shows the empty state', (tester) async {
     setScreenSize(tester, const Size(390, 844));
-    await tester.pumpWidget(const EleStockApp());
+    await tester.pumpWidget(withRepository(const EleStockApp()));
 
     await tester.enterText(find.byType(SearchBar), 'flux capacitor');
     await tester.pump();
