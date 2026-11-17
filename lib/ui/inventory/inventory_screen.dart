@@ -10,6 +10,7 @@ import '../history/history_screen.dart';
 import '../item_details/item_details_screen.dart';
 import '../item_form/item_form_screen.dart';
 import '../scanner/scanner_screen.dart';
+import '../shopping_list/shopping_list_screen.dart';
 import 'inventory_view_model.dart';
 
 /// The main page: every part and tool in the workshop.
@@ -81,6 +82,15 @@ class _InventoryScaffold extends StatelessWidget {
             icon: const Icon(Icons.history),
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(builder: (_) => const HistoryScreen()),
+            ),
+          ),
+          IconButton(
+            tooltip: 'Shopping list',
+            icon: const Icon(Icons.shopping_cart_outlined),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const ShoppingListScreen(),
+              ),
             ),
           ),
         ],

@@ -7,6 +7,7 @@ import 'data/repositories/auth_repository.dart';
 import 'data/repositories/fake_auth_repository.dart';
 import 'data/repositories/fake_inventory_repository.dart';
 import 'data/repositories/item_repository.dart';
+import 'data/repositories/order_repository.dart';
 import 'data/repositories/supabase_auth_repository.dart';
 import 'data/repositories/transaction_repository.dart';
 import 'ui/auth/auth_gate.dart';
@@ -24,8 +25,8 @@ const _supabaseKey = String.fromEnvironment('SUPABASE_KEY');
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // One instance behind both interfaces: taking stock changes the item and
-  // the history together.
+  // One instance behind all three interfaces: taking stock or receiving an
+  // order changes the item and the history together.
   final inventory = FakeInventoryRepository(failureRate: 0.2);
   final auth = await _createAuthRepository();
 
@@ -34,6 +35,7 @@ Future<void> main() async {
       providers: [
         Provider<ItemRepository>.value(value: inventory),
         Provider<TransactionRepository>.value(value: inventory),
+        Provider<OrderRepository>.value(value: inventory),
         Provider<AuthRepository>.value(value: auth),
         ChangeNotifierProvider(create: (_) => SessionViewModel(auth)),
         ChangeNotifierProvider(create: (_) => SettingsViewModel()),
