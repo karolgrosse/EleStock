@@ -3,11 +3,11 @@ import 'package:provider/provider.dart';
 
 import '../../domain/models/item.dart';
 import '../core/category_ui.dart';
-import '../core/widgets/coming_soon.dart';
 import '../core/widgets/empty_state.dart';
 import '../core/widgets/error_view.dart';
 import '../core/widgets/stock_badge.dart';
 import '../item_details/item_details_screen.dart';
+import '../item_form/item_form_screen.dart';
 import '../scanner/scanner_screen.dart';
 import 'inventory_view_model.dart';
 
@@ -33,13 +33,41 @@ class InventoryScreen extends StatelessWidget {
 class _InventoryScaffold extends StatelessWidget {
   const _InventoryScaffold();
 
+  /// Opens the item form. A new or edited item reaches the list through
+  /// `itemUpdates`; here it is only selected and confirmed.
+  Future<void> _openForm(BuildContext context, {String? itemId}) async {
+    final vm = context.read<InventoryViewModel>();
+    final messenger = ScaffoldMessenger.of(context);
+    final saved = await Navigator.of(context).push<Item>(
+      MaterialPageRoute(builder: (_) => ItemFormScreen(itemId: itemId)),
+    );
+    if (saved == null) return;
+    vm.select(saved.id);
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(itemId == null ? 'Added ${saved.name}' : 'Saved changes'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final vm = context.watch<InventoryViewModel>();
+    final selectedId = vm.selectedId;
+    // On phones the details screen has its own Edit button; on wide windows
+    // the details pane has none, so it lives here.
+    final wide =
+        MediaQuery.sizeOf(context).width >= InventoryScreen.wideBreakpoint;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Inventory'),
         actions: [
+          if (wide && selectedId != null)
+            IconButton(
+              tooltip: 'Edit item',
+              icon: const Icon(Icons.edit_outlined),
+              onPressed: () => _openForm(context, itemId: selectedId),
+            ),
           IconButton(
             tooltip: 'Scan QR label',
             icon: const Icon(Icons.qr_code_scanner),
@@ -51,7 +79,7 @@ class _InventoryScaffold extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add item',
-        onPressed: () => showComingSoon(context, 'Add item'),
+        onPressed: () => _openForm(context),
         child: const Icon(Icons.add),
       ),
       body: switch (vm.state) {

@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import '../../domain/models/item.dart';
 import '../../domain/models/stock_transaction.dart';
 import '../core/category_ui.dart';
-import '../core/widgets/coming_soon.dart';
 import '../core/widgets/empty_state.dart';
 import '../core/widgets/error_view.dart';
 import '../core/widgets/stock_badge.dart';
 import '../core/widgets/transaction_tile.dart';
+import '../item_form/item_form_screen.dart';
 import 'item_details_view_model.dart';
 import 'quantity_dialog.dart';
 
@@ -47,7 +47,12 @@ class _ItemDetailsScaffold extends StatelessWidget {
             IconButton(
               tooltip: 'Edit item',
               icon: const Icon(Icons.edit_outlined),
-              onPressed: () => showComingSoon(context, 'Edit item'),
+              // The saved changes come back through itemUpdates.
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => ItemFormScreen(itemId: state.item.id),
+                ),
+              ),
             ),
         ],
       ),
