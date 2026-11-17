@@ -15,4 +15,16 @@ abstract interface class ItemRepository {
   /// stock), so that every screen showing it can update: the inventory list,
   /// the details pane and later the shopping list.
   Stream<Item> get itemUpdates;
+
+  /// Saves a new item and returns it with the id it was given. The id of
+  /// [item] is ignored. Emits the saved item on [itemUpdates].
+  Future<Item> createItem(Item item);
+
+  /// Saves the details of an existing item (name, location, threshold, …)
+  /// and returns it as stored. Emits it on [itemUpdates].
+  ///
+  /// The stock is **not** changed here: the stored quantity is kept, because
+  /// stock only changes through transactions, so that the history stays
+  /// complete. Throws a [StateError] when no item has the id of [item].
+  Future<Item> updateItem(Item item);
 }
