@@ -49,13 +49,11 @@ enum StockChangeResult { saved, notEnoughStock, failed }
 class ItemDetailsViewModel extends ChangeNotifier {
   ItemDetailsViewModel({
     required this.itemId,
-    required ItemRepository items,
-    required TransactionRepository transactions,
+    required this._items,
+    required this._transactions,
     this.memberName = 'You',
     DateTime Function()? clock,
-  }) : _items = items,
-       _transactions = transactions,
-       _clock = clock ?? DateTime.now {
+  }) : _clock = clock ?? DateTime.now {
     // Someone else (another screen, later another device) changed the item:
     // show the new stock without reloading everything.
     _subscription = _items.itemUpdates
@@ -127,7 +125,9 @@ class ItemDetailsViewModel extends ChangeNotifier {
     String? note,
   ) async {
     final before = _state;
-    if (before is! ItemDetailsLoaded || _saving) return StockChangeResult.failed;
+    if (before is! ItemDetailsLoaded || _saving) {
+      return StockChangeResult.failed;
+    }
     if (quantity <= 0) {
       throw ArgumentError.value(quantity, 'quantity', 'must be positive');
     }
