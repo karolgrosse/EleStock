@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/widgets/empty_state.dart';
+import '../history/history_screen.dart';
 import '../inventory/inventory_screen.dart';
 import '../profile/profile_screen.dart';
 import '../scanner/scanner_screen.dart';
@@ -47,7 +48,7 @@ final _sections = <_Section>[
     'History',
     Icons.history_outlined,
     Icons.history,
-    (_) => const _ComingSoonSection(title: 'History', icon: Icons.history),
+    (_) => const HistoryScreen(),
   ),
   _Section(
     'Shopping',
