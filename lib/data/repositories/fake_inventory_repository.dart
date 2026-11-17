@@ -69,6 +69,30 @@ class FakeInventoryRepository
   Stream<Item> get itemUpdates => _updates.stream;
 
   @override
+  Future<Item> createItem(Item item) async {
+    await _simulateNetwork();
+    var n = _items.length + 1;
+    while (_items.containsKey('item-$n')) {
+      n++;
+    }
+    final saved = item.copyWith(id: 'item-$n');
+    _items[saved.id] = saved;
+    _updates.add(saved);
+    return saved;
+  }
+
+  @override
+  Future<Item> updateItem(Item item) async {
+    await _simulateNetwork();
+    final stored = _items[item.id];
+    if (stored == null) throw StateError('No item with id ${item.id}');
+    final saved = item.copyWith(quantity: stored.quantity);
+    _items[saved.id] = saved;
+    _updates.add(saved);
+    return saved;
+  }
+
+  @override
   Future<List<StockTransaction>> fetchTransactions({String? itemId}) async {
     await _simulateNetwork();
     return List.unmodifiable(
