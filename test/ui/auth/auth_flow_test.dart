@@ -67,7 +67,8 @@ void main() {
         auth: instantAuth(signedIn: true),
       ),
     );
-    await tester.pump();
+    // Let the inventory finish loading (a spinner never settles).
+    await tester.pump(const Duration(seconds: 1));
 
     expect(find.byType(NavigationRail), findsOneWidget);
     expect(find.byType(NavigationBar), findsNothing);
