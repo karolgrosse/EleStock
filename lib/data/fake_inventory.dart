@@ -1,4 +1,5 @@
 import '../domain/models/item.dart';
+import '../domain/models/order_entry.dart';
 import '../domain/models/stock_transaction.dart';
 
 // Fake data for lab 1. Replaced by drift + Supabase in lab 3.
@@ -135,6 +136,18 @@ final fakeTransactions = <StockTransaction>[
     type: TransactionType.take,
     quantity: 10,
     timestamp: DateTime(2026, 10, 16, 14, 40),
+  ),
+];
+
+// The nyloc nuts ran out and are already on their way, so the shopping list
+// shows one item as ordered from the start.
+final fakeOrders = <OrderEntry>[
+  OrderEntry(
+    id: 'o1',
+    itemId: 'm5-nyloc',
+    quantity: 100,
+    memberName: 'Jan Kowalski',
+    orderedAt: DateTime(2026, 10, 19, 8, 30),
   ),
 ];
 
