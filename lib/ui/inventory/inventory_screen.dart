@@ -6,7 +6,8 @@ import '../core/category_ui.dart';
 import '../core/widgets/coming_soon.dart';
 import '../core/widgets/empty_state.dart';
 import '../core/widgets/stock_badge.dart';
-import 'item_details_screen.dart';
+import '../item_details/item_details_screen.dart';
+import '../scanner/scanner_screen.dart';
 
 /// The main page: every part and tool in the workshop.
 ///
@@ -44,7 +45,9 @@ class _InventoryScreenState extends State<InventoryScreen> {
           IconButton(
             tooltip: 'Scan QR label',
             icon: const Icon(Icons.qr_code_scanner),
-            onPressed: () => showComingSoon(context, 'QR scanner'),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const ScannerScreen()),
+            ),
           ),
         ],
       ),
@@ -74,7 +77,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                       )
                     : ItemDetailsView(
                         key: ValueKey(selected.id),
-                        item: selected,
+                        itemId: selected.id,
                       ),
               ),
             ],
@@ -145,7 +148,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                         } else {
                           Navigator.of(context).push(
                             MaterialPageRoute<void>(
-                              builder: (_) => ItemDetailsScreen(item: item),
+                              builder: (_) => ItemDetailsScreen(itemId: item.id),
                             ),
                           );
                         }
